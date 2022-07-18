@@ -49,6 +49,24 @@
         <servlet-name>Dispatcher02Servlet</servlet-name>
         <url-pattern>/dispatcher02</url-pattern>
     </servlet-mapping>
+    <!--redirect-->
+    <servlet>
+        <servlet-name>Redirect01Servlet</servlet-name>
+        <servlet-class>com.dyp.fruit.servlet.redirect.Redirect01Servlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Redirect01Servlet</servlet-name>
+        <url-pattern>/redirect01</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Redirect02Servlet</servlet-name>
+        <servlet-class>com.dyp.fruit.servlet.redirect.Redirect02Servlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Redirect02Servlet</servlet-name>
+        <url-pattern>/redirect02</url-pattern>
+    </servlet-mapping>
 
 
 </web-app>

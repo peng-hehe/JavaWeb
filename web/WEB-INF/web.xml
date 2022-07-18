@@ -5,6 +5,24 @@
          version="4.0">
 
     <servlet>
+        <servlet-name>Session01Servlet</servlet-name>
+        <servlet-class>com.dyp.fruit.servlet.session.Session01Servlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Session01Servlet</servlet-name>
+        <url-pattern>/session01</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Session02Servlet</servlet-name>
+        <servlet-class>com.dyp.fruit.servlet.session.Session02Servlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Session02Servlet</servlet-name>
+        <url-pattern>/session02</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>AddServlet</servlet-name>
         <servlet-class>com.dyp.fruit.servlet.AddServlet</servlet-class>
     </servlet>

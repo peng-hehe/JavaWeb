@@ -5,6 +5,15 @@
          version="4.0">
 
     <servlet>
+        <servlet-name>AddServlet</servlet-name>
+        <servlet-class>com.dyp.fruit.servlet.AddServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddServlet</servlet-name>
+        <url-pattern>/add</url-pattern>
+    </servlet-mapping>
+<!--session-->
+    <servlet>
         <servlet-name>Session01Servlet</servlet-name>
         <servlet-class>com.dyp.fruit.servlet.session.Session01Servlet</servlet-class>
     </servlet>
@@ -22,12 +31,24 @@
         <url-pattern>/session02</url-pattern>
     </servlet-mapping>
 
+    <!--dispatcher-->
     <servlet>
-        <servlet-name>AddServlet</servlet-name>
-        <servlet-class>com.dyp.fruit.servlet.AddServlet</servlet-class>
+        <servlet-name>Dispatcher01Servlet</servlet-name>
+        <servlet-class>com.dyp.fruit.servlet.dispatcher.Dispatcher01Servlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>AddServlet</servlet-name>
-        <url-pattern>/add</url-pattern>
+        <servlet-name>Dispatcher01Servlet</servlet-name>
+        <url-pattern>/dispatcher01</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Dispatcher02Servlet</servlet-name>
+        <servlet-class>com.dyp.fruit.servlet.dispatcher.Dispatcher02Servlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Dispatcher02Servlet</servlet-name>
+        <url-pattern>/dispatcher02</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>

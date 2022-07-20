@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
 
-@WebServlet("/add.do")
-public class AddServlet extends ViewBaseServlet {
+@WebServlet("/update.do")
+public class UpdateServlet extends ViewBaseServlet {
     private FruitService fruitService = new FruitService();
 
     @Override
@@ -24,10 +24,15 @@ public class AddServlet extends ViewBaseServlet {
         String fcountStr = req.getParameter("fcount");
         Integer fcount = Integer.parseInt(fcountStr);
         String remark = req.getParameter("remark");
-        Fruit fruit = new Fruit(null, fname, price, fcount, remark);
-        fruitService.addFruit(fruit);
+        String fidStr = req.getParameter("fid");
+        Integer fid = Integer.parseInt(fidStr);
+        Fruit fruit = new Fruit(fid, fname, price, fcount, remark);
 
+        fruitService.updateFruit(fruit);
+
+//        super.processTemplate("index",req,resp);
         resp.sendRedirect("index");
+
 
     }
 }

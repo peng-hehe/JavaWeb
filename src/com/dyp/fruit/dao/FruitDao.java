@@ -11,4 +11,9 @@ public interface FruitDao {
     //获取所有的库存列表信息
     List<Fruit> getFruitList();
 
+    Fruit getFruit(String fid);
+
+    void updateFruit(Fruit fruit);
+
+    void delFruit(Integer fid);
 }

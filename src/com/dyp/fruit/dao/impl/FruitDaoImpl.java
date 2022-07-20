@@ -5,6 +5,7 @@ import com.dyp.fruit.dao.FruitDao;
 import com.dyp.fruit.pojo.Fruit;
 import com.dyp.fruit.util.DruidUtils;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import java.sql.Connection;
@@ -18,7 +19,6 @@ public class FruitDaoImpl extends BaseDao<Fruit> implements FruitDao {
         Connection connection = null;
         try {
             connection = DruidUtils.getConnection();
-            QueryRunner queryRunner = new QueryRunner();
             String sql = "insert into t_fruit (fname,price,fcount,remark) values(?,?,?,?)";
 
             int update = queryRunner.update(connection, sql, fruit.getFname(), fruit.getPrice(), fruit.getFcount(), fruit.getRemark());
@@ -35,11 +35,10 @@ public class FruitDaoImpl extends BaseDao<Fruit> implements FruitDao {
         Connection connection = null;
         try {
             connection = DruidUtils.getConnection();
-            QueryRunner queryRunner = new QueryRunner();
-            String sql = "select fid,fname,price,fcount,remark from t_fruit where fid <= ?";
+            String sql = "select fid,fname,price,fcount,remark from t_fruit";
             BeanListHandler<Fruit> fruitBeanListHandler = new BeanListHandler<>(Fruit.class);
 
-            List<Fruit> fruitList = queryRunner.query(connection, sql, fruitBeanListHandler,10);
+            List<Fruit> fruitList = queryRunner.query(connection, sql, fruitBeanListHandler);
             return fruitList;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -48,6 +47,47 @@ public class FruitDaoImpl extends BaseDao<Fruit> implements FruitDao {
         }
         return null;
 
+    }
+
+    @Override
+    public Fruit getFruit(String fid) {
+        Connection connection = this.getConnection();
+        String sql = "select fid,fname,price,fcount,remark from t_fruit where fid = ?";
+        BeanHandler<Fruit> fruitBeanHandler = new BeanHandler<>(Fruit.class);
+        try {
+            Fruit fruit = queryRunner.query(connection, sql, fruitBeanHandler, fid);
+            if (fruit != null){
+                return fruit;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public void updateFruit(Fruit fruit) {
+        Connection connection = this.getConnection();
+        String sql = "update t_fruit set fname = ?,price = ?,fcount = ?,remark = ? where fid = ?";
+
+        try {
+            queryRunner.update(connection, sql, fruit.getFname(), fruit.getPrice(), fruit.getFcount(), fruit.getRemark(), fruit.getFid());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void delFruit(Integer fid) {
+        Connection connection = this.getConnection();
+        String sql = "delete from t_fruit where fid = ?";
+
+        try {
+            queryRunner.update(connection, sql,fid);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 

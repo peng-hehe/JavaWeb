@@ -16,7 +16,7 @@
 
     <servlet>
         <servlet-name>AddServlet</servlet-name>
-        <servlet-class>com.dyp.fruit.servlet.AddServlet</servlet-class>
+        <servlet-class>com.dyp.fruit.servlet.AddOneServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AddServlet</servlet-name>

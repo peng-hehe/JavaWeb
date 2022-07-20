@@ -1,5 +1,7 @@
 package com.dyp.fruit.dao;
 
+import com.dyp.fruit.util.DruidUtils;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -225,4 +227,19 @@ public abstract class BaseDao<T> {
         }
         return list ;
     }
+
+    protected Connection getConnection(){
+        try {
+            return DruidUtils.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    protected void closeConnection(Connection conn){
+        DruidUtils.close(conn);
+    }
+
+
 }

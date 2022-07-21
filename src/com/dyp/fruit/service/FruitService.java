@@ -28,6 +28,13 @@ public class FruitService {
         return fruitList;
     }
 
+    public List<Fruit> getFruitList(Integer pageNo){
+        pageNo = (pageNo-1)*5;
+        List<Fruit> fruitList = fruitDao.getFruitList(pageNo);
+
+        return fruitList;
+    }
+
     public Fruit eidtFruit(String fid) {
         Fruit fruit = fruitDao.getFruit(fid);
         return fruit;
@@ -39,5 +46,10 @@ public class FruitService {
 
     public void delFruit(Integer fid) {
         fruitDao.delFruit(fid);
+    }
+
+    public Integer getFruitCount() {
+        Integer fruitCount = fruitDao.getFruitCount();
+        return fruitCount;
     }
 }

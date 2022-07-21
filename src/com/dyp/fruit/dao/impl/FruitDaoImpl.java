@@ -7,6 +7,7 @@ import com.dyp.fruit.util.DruidUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -39,6 +40,25 @@ public class FruitDaoImpl extends BaseDao<Fruit> implements FruitDao {
             BeanListHandler<Fruit> fruitBeanListHandler = new BeanListHandler<>(Fruit.class);
 
             List<Fruit> fruitList = queryRunner.query(connection, sql, fruitBeanListHandler);
+            return fruitList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DruidUtils.close(connection);
+        }
+        return null;
+
+    }
+
+    @Override
+    public List<Fruit> getFruitList(Integer pageNo) {
+        Connection connection = null;
+        try {
+            connection = DruidUtils.getConnection();
+            String sql = "select fid,fname,price,fcount,remark from t_fruit limit ?,5";
+            BeanListHandler<Fruit> fruitBeanListHandler = new BeanListHandler<>(Fruit.class);
+
+            List<Fruit> fruitList = queryRunner.query(connection, sql, fruitBeanListHandler,pageNo);
             return fruitList;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -88,6 +108,23 @@ public class FruitDaoImpl extends BaseDao<Fruit> implements FruitDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public Integer getFruitCount() {
+        Connection connection = this.getConnection();
+        String sql = "select count(1) from t_fruit";
+        ScalarHandler scalarHandler = new ScalarHandler();
+
+        try {
+            Long query = (Long) queryRunner.query(connection, sql, scalarHandler);
+            if (query != null){
+                return query.intValue();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

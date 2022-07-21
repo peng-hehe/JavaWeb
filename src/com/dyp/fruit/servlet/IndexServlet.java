@@ -19,12 +19,25 @@ public class IndexServlet extends ViewBaseServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        List<Fruit> fruitList = fruitService.getFruitList();
-        fruitList.forEach(System.out::println);
-        req.getSession().setAttribute("fruitList",fruitList);
+        Integer pageNo = 1;
+        String pageNoStr = req.getParameter("pageNo");
+        if (pageNoStr != null && pageNoStr != "") {
+            pageNo = Integer.parseInt(pageNoStr);
+        }
+        req.getSession().setAttribute("pageNo",pageNo);
+
+        List<Fruit> fruitList = fruitService.getFruitList(pageNo);
+        req.getSession().setAttribute("fruitList", fruitList);
+
+        Integer fruitCount = fruitService.getFruitCount();
+
+        int pageCount = (fruitCount +5 - 1)/5;
+        req.getSession().setAttribute("pageCount",pageCount);
+
+
 
 //        req.getRequestDispatcher("index.html").forward(req,resp);
-        super.processTemplate("index",req,resp);
+        super.processTemplate("index", req, resp);
 
     }
 }

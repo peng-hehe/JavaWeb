@@ -28,9 +28,10 @@ public class FruitService {
         return fruitList;
     }
 
-    public List<Fruit> getFruitList(Integer pageNo){
+    public List<Fruit> getFruitList(Integer pageNo, String keyword){
         pageNo = (pageNo-1)*5;
-        List<Fruit> fruitList = fruitDao.getFruitList(pageNo);
+        String keywordSearch = "%" + keyword + "%";
+        List<Fruit> fruitList = fruitDao.getFruitList(pageNo,keywordSearch );
 
         return fruitList;
     }
@@ -48,8 +49,9 @@ public class FruitService {
         fruitDao.delFruit(fid);
     }
 
-    public Integer getFruitCount() {
-        Integer fruitCount = fruitDao.getFruitCount();
+    public Integer getFruitCount(String keyword) {
+        String keywordsearch = "%" + keyword + "%";
+        Integer fruitCount = fruitDao.getFruitCount(keywordsearch);
         return fruitCount;
     }
 }

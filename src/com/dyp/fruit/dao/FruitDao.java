@@ -10,7 +10,7 @@ public interface FruitDao {
 
     //获取所有的库存列表信息
     List<Fruit> getFruitList();
-    List<Fruit> getFruitList(Integer pageNo);
+    List<Fruit> getFruitList(Integer pageNo , String keyword);
 
     Fruit getFruit(String fid);
 
@@ -18,5 +18,5 @@ public interface FruitDao {
 
     void delFruit(Integer fid);
 
-    Integer getFruitCount();
+    Integer getFruitCount(String keyword);
 }

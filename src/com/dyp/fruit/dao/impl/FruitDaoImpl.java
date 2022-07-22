@@ -51,14 +51,14 @@ public class FruitDaoImpl extends BaseDao<Fruit> implements FruitDao {
     }
 
     @Override
-    public List<Fruit> getFruitList(Integer pageNo) {
+    public List<Fruit> getFruitList(Integer pageNo, String keyword) {
         Connection connection = null;
         try {
             connection = DruidUtils.getConnection();
-            String sql = "select fid,fname,price,fcount,remark from t_fruit limit ?,5";
+            String sql = "select fid,fname,price,fcount,remark from t_fruit where fname like ? or remark like ?  limit ?,5";
             BeanListHandler<Fruit> fruitBeanListHandler = new BeanListHandler<>(Fruit.class);
 
-            List<Fruit> fruitList = queryRunner.query(connection, sql, fruitBeanListHandler,pageNo);
+            List<Fruit> fruitList = queryRunner.query(connection, sql, fruitBeanListHandler,keyword,keyword,pageNo);
             return fruitList;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -111,13 +111,13 @@ public class FruitDaoImpl extends BaseDao<Fruit> implements FruitDao {
     }
 
     @Override
-    public Integer getFruitCount() {
+    public Integer getFruitCount(String keyword) {
         Connection connection = this.getConnection();
-        String sql = "select count(1) from t_fruit";
+        String sql = "select count(1) from t_fruit where fname like ? or remark like ?";
         ScalarHandler scalarHandler = new ScalarHandler();
 
         try {
-            Long query = (Long) queryRunner.query(connection, sql, scalarHandler);
+            Long query = (Long) queryRunner.query(connection, sql, scalarHandler,keyword,keyword);
             if (query != null){
                 return query.intValue();
             }

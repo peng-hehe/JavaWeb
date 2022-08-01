@@ -1,4 +1,4 @@
-package con.dyp.book.pojo;
+package com.dyp.book.pojo;
 
 public class OrderItem {
     private Integer id ;

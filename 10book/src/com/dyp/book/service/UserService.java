@@ -1,6 +1,6 @@
-package con.dyp.book.service;
+package com.dyp.book.service;
 
-import con.dyp.book.pojo.User;
+import com.dyp.book.pojo.User;
 
 public interface UserService {
     User login(String uname , String pwd );

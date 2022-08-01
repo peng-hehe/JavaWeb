@@ -1,4 +1,4 @@
-package con.dyp.book.pojo;
+package com.dyp.book.pojo;
 
 import java.util.Date;
 import java.util.List;

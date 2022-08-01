@@ -1,7 +1,7 @@
-package con.dyp.book.controller;
+package com.dyp.book.controller;
 
-import con.dyp.book.pojo.User;
-import con.dyp.book.service.UserService;
+import com.dyp.book.pojo.User;
+import com.dyp.book.service.UserService;
 
 public class UserController {
 

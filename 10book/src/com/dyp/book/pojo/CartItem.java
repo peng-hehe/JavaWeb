@@ -1,4 +1,4 @@
-package con.dyp.book.pojo;
+package com.dyp.book.pojo;
 
 //我们应该还需要设计一个Cart类，代表购物车这个实体
 public class CartItem {

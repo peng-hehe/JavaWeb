@@ -1,7 +1,7 @@
-package con.dyp.book.dao;
+package com.dyp.book.dao;
 
 
-import con.dyp.book.pojo.User;
+import com.dyp.book.pojo.User;
 
 public interface UserDAO {
     User getUser(String uname , String pwd );

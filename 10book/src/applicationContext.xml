@@ -12,10 +12,13 @@
 ]>
 
 <beans>
-    <bean id="page" class="com.atguigu.myssm.myspringmvc.PageController"/>
+    <bean id="page" class="com.dyp.myssm.myspringmvc.PageController"/>
 
+    <bean id="queryRunner" class="org.apache.commons.dbutils.QueryRunner"/>
     <!-- DAO -->
-    <bean id="userDAO" class="com.dyp.book.dao.impl.UserDAOImpl"/>
+    <bean id="userDAO" class="com.dyp.book.dao.impl.UserDAOImpl">
+        <property name="queryRunner" ref="queryRunner"/>
+    </bean>
 
     <!-- service -->
     <bean id="userService" class="com.dyp.book.service.impl.UserServiceImpl">

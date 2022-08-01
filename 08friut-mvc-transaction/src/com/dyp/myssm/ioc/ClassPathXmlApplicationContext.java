@@ -1,5 +1,6 @@
 package com.dyp.myssm.ioc;
 
+import com.dyp.myssm.util.StringUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -17,12 +18,20 @@ import java.util.Map;
 
 public class ClassPathXmlApplicationContext implements BeanFactory{
     private Map<String,Object> beanMap = new HashMap<>();
+    private String path = "applicationContext.xml";
 
     public ClassPathXmlApplicationContext(){
+        this("applicationContext.xml");
+    }
+
+    public ClassPathXmlApplicationContext(String path){
+        if (StringUtil.isEmpty(path)){
+            throw  new RuntimeException("IOC容器配置文件没有指定");
+        }
 
         try {
             //读取配置文件
-            InputStream is = getClass().getClassLoader().getResourceAsStream("applicationContext.xml");
+            InputStream is = getClass().getClassLoader().getResourceAsStream(path);
             //获取documentBuilderFactory
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             //获取documentBuilder
